@@ -1,0 +1,12 @@
+#resultadoCriptografia {
+    display: none;
+}
+
+#resultadoDescriptografia {
+    display: none;
+}
+
+#divResultados {
+    display: none;
+    margin-top: 100px;
+}

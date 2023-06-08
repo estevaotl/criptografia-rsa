@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <title>Criptografia e Descriptografia de Arquivos</title>
+</head>
+
+<body style="background-color: beige;">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="criptografia">Criptografia:</label>
+                    <input type="text" class="form-control" id="valorNCriptografia" placeholder="Valor de N" aria-label="Valor de N"><br>
+                    <input type="file" class="form-control-file" id="criptografia" accept=".txt">
+                </div>
+                <button type="button" class="btn btn-success" id="enviarCriptografia">Enviar</button>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="descriptografia">Descriptografia:</label>
+                    <input type="text" id="valorNDescriptografia" class="form-control" placeholder="Valor de N" aria-label="Valor de N"><br>
+                    <input type="file" class="form-control-file" id="descriptografia" accept=".txt">
+                </div>
+                <button type="button" class="btn btn-success" id="enviarDescriptografia">Enviar</button>
+            </div>
+        </div>
+
+        <div id="divResultados">
+            <h1>Resultados</h1>
+            <span id="resultadoCriptografia"></span>
+            <span id="resultadoDescriptografia"></span>
+        </div>
+
+        <span id="saidaPaginaHtml"></span>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script src="./js/index.js" defer></script>
+</body>
+
+</html>

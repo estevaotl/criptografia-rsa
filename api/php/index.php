@@ -10,13 +10,13 @@
         $_SERVER[ 'REQUEST_URI' ]
     );
 
-    if ( $metodo === 'POST' && preg_match( '/^\/trabalho_final\/api\/php\/criptografar\/?$/i', $rota) ) {
+    if ( $metodo === 'POST' && preg_match( '/^\/criptografar\/?$/i', $rota) ) {
         $criptografia = new Criptografia();
         $resposta = null;
         header( 'Content-Type: application/json' );
 
         try {
-            $blocosCriptografados = $criptografia->criptografar($_FILES['file'], $_POST['valorN']);
+            $blocosCriptografados = $criptografia->criptografar($_FILES['file'], (float) $_POST['valorN']);
             http_response_code( 200 );
             $resposta = $blocosCriptografados;
         } catch (Exception $e) {
@@ -25,13 +25,13 @@
         }
 
         die( json_encode($resposta, JSON_PRETTY_PRINT) );
-    } elseif ( $metodo === 'POST' && preg_match( '/^\/trabalho_final\/api\/php\/descriptografar\/?$/i', $rota) ) {
+    } elseif ( $metodo === 'POST' && preg_match( '/^\/descriptografar\/?$/i', $rota) ) {
         $criptografia = new Descriptografia();
         $resposta = null;
         header( 'Content-Type: application/json' );
 
         try {
-            $blocosCriptografados = $criptografia->descriptografar($_FILES['file'], $_POST['valorN']);
+            $blocosCriptografados = $criptografia->descriptografar($_FILES['file'], (float) $_POST['valorN']);
             http_response_code( 200 );
             $resposta = $blocosCriptografados;
         } catch (Exception $e) {

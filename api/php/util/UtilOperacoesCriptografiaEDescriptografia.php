@@ -9,7 +9,7 @@
                 $blocoCodificado = fmod(($bloco[$i] ** $e), $n);
                 array_push($resultado, $blocoCodificado);
             }
-    
+
             return $resultado;
         }
 
@@ -22,38 +22,40 @@
             $aux = null;
             $bloco = [];
             $i = 0;
-    
+
             while ($i < count($arrayCodigoAsc)) {
                 $aux .= $arrayCodigoAsc[$i];
                 if(array_key_exists($i+1, $arrayCodigoAsc) && $arrayCodigoAsc[$i+1] == 0){
                     $aux .= $arrayCodigoAsc[$i+1];
                 }
-    
+
                 if($aux >= $n){
                     if(array_key_exists($i+1, $arrayCodigoAsc) && (int) $arrayCodigoAsc[$i+1] === 0 && ($i+1) < count($arrayCodigoAsc)){
                         $ultimaCasaArrayCodigoAscPosicaoAtual = substr($aux, 0, -1);
                         $penultimaCasaArrayCodigoAscPosicaoAtual = substr($ultimaCasaArrayCodigoAscPosicaoAtual, 0, -1);
-                        $bloco[] = $penultimaCasaArrayCodigoAscPosicaoAtual;
-    
+                        $bloco[] = $ultimaCasaArrayCodigoAscPosicaoAtual;
+                        
                         $aux = $arrayCodigoAsc[$i];
+                        $i--;
+                        $aux = null;
                     } else {
                         $bloco[] = substr($aux, 0, -1);
                         $i--;
                         $aux = null;
                     }
                 }
-    
+                
                 if($aux == 0){
                     $aux = null;
                 }
-    
+                
                 $i++;
             }
-    
+            
             if($aux != null){
                 $bloco[] = $aux;
             }
-    
+
             return $bloco;
         }
 
@@ -65,7 +67,7 @@
         public static function obterE($numero){
             $y = self::obterFI($numero);
             for ($i = 2; $i < $y; $i++) { 
-                $aux = euclidianoEstendido($i, $y);
+                $aux = self::euclidianoEstendido($i, $y);
                 if($aux['MDC'] == 1){
                     return $i;
                 }
@@ -77,7 +79,6 @@
         public static function calD($e, $n){
             $phi = self::obterFi($n);
             $d = self::invModular($e, $phi);
-    
             return $d;
         }
 
@@ -126,25 +127,6 @@
                 }
             }
         }
-
-        public static function somaAoAsc($c){
-            return ord($c) + 100;
-        }
-    
-        public static function numeroParaTexto($numero){
-            return (string) $numero;
-        }
-    
-        public static function retornaPalavra($texto){
-            $aux = null;
-            $ctexto = null;
-            foreach (str_split($texto) as $t) {
-                $aux = self::numeroParaTexto(somaAoAsc($t));
-                $ctexto .= $aux;
-            }
-    
-            return $ctexto;
-        }
     
         public static function euclidianoEstendido($a, $b){
             $x = [0, 1];
@@ -190,7 +172,7 @@
                 $y[0] = $yj;
             }
     
-            return ['MDC' => $b, 'Alpha' => $y[1], 'Beta' => $x[1]];
+            return ['MDC' => $b, 'Alpha' => $x[1], 'Beta' => $y[1]];
         }
 
         public static function decodificaBloco($n, $d, $a){
@@ -236,22 +218,23 @@
     
         public static function potencializacao($x, $y, $n){
             $v = array();
-    
+
             if($y == 0)
                 return [0 => 1];
     
             for ($i = 0; $i <= $y; $i++) { 
-                if( $i == 0 )
+                if( $i == 0 ){
                     $v[$i] = 1;
-                else 
+                } else {
                     $v[$i] = self::congruencia($v[$i - 1] * self::congruencia($x, $n), $n);
+                }
             }
     
             return $v;
         }
 
-        public static function printVariavel($variavel){
-            var_dump($variavel);
+        public static function printVariavel(...$args){
+            var_dump($args);
             die();
         }
     
@@ -263,5 +246,21 @@
             }
     
             return $modulo;
+        }
+
+        public static function escreverBlocoCodificadoEmArquivo($blocosCodificados, $nome_arquivo) {
+            // Abre o arquivo para escrita, removendo o conteúdo anterior
+            $arquivo = fopen($nome_arquivo, 'w');
+
+            foreach ($blocosCodificados as $bloco) {
+                // Converte o array em uma string separada por vírgulas
+                $array_string = implode(',', $bloco['blocosCodificados']);
+
+                // Escreve a string no arquivo
+                fwrite($arquivo, $array_string . PHP_EOL);
+            }
+
+            // Fecha o arquivo
+            fclose($arquivo);
         }
     }

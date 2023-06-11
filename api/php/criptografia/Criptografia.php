@@ -32,7 +32,17 @@
 
                 $linhasDivididas = explode("<br>", $linhas);
 
-                return codificar(array_filter($linhasDivididas), $valorN);
+                $blocoCodificado = codificar(array_filter($linhasDivididas), $valorN);
+
+                // Obtém o diretório pai do diretório atual
+                $diretorio_pai = dirname(dirname(dirname(dirname(__FILE__))));
+
+                // Constrói o caminho absoluto para o arquivo na raiz do projeto
+                $caminho_arquivo = $diretorio_pai . '/arquivoDescriptografia.txt';
+
+                UtilOperacoesCriptografiaEDescriptografia::escreverBlocoCodificadoEmArquivo($blocoCodificado, $caminho_arquivo);
+
+                return $blocoCodificado;
             } else {
                 echo "O arquivo não existe.";
             }
@@ -48,8 +58,8 @@
                 $codigo .= UtilOperacoesCriptografiaEDescriptografia::caractereParaAsc($texto[$i]);
             }
 
-            $bloco = blocoNumerico($codigo, $valorN);
-            $blocoCodificado = ["palavra" => $linha, "blocoCodificado" => codificacaoBloco($bloco, $valorN)];
+            $bloco = UtilOperacoesCriptografiaEDescriptografia::blocoNumerico($codigo, $valorN);
+            $blocoCodificado = ["palavra" => $linha, "blocosCodificados" => UtilOperacoesCriptografiaEDescriptografia::codificacaoBloco($bloco, $valorN)];
             array_push($blocosCodificados, $blocoCodificado);
         }
 

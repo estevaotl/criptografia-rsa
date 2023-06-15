@@ -68,7 +68,7 @@ function montarEExibirTabelaResultadosCriptografados(resultados){
         html += "<thead>";
         html += "<tr>";
         html += "<th scope='col'>Posição</th>";
-        html += "<th scope='col'>Codificado</th>";
+        html += "<th scope='col'>Bloco Codificado</th>";
         html += "</tr>";
         html += "</thead>";
         html += "<tbody>";
